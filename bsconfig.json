@@ -1,11 +1,11 @@
 {
-  "name": "reason-react-examples",
+  "name": "yahtzee",
   "reason": {
     "react-jsx": 3
   },
   "sources": {
-    "dir" : "src",
-    "subdirs" : true
+    "dir" : "client",
+    "subdirs" : ["src"]
   },
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
   "package-specs": [{
