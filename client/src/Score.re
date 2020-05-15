@@ -87,21 +87,28 @@ let getIsTrackingMessage = score => {
   let allNumbersScored = Belt.Map.size(score.numbers) === 6;
   let trackingValue = getNumberTrackingValue(score.numbers);
 
-  switch (hasBonus, noNumberScore, allNumbersScored, trackingValue) {
-  | (true, _, _, _) => "You got your bonus!"
-  | (_, _, true, _) => "You didn't get your bonus!"
-  | (_, true, _, _) => ""
-  | (_, _, _, num) =>
-    num < 0
-      ? "You aren't on track to get your bonus! You need "
-        ++ string_of_int(num * (-1))
-        ++ " more points."
-      : "You are on track to get your bonus!"
-        ++ (
-          num > 0
-            ? " You have " ++ string_of_int(num) ++ " spare points." : ""
-        )
-  };
+  let message =
+    if (hasBonus) {
+      "You got your bonus!";
+    } else if (noNumberScore) {
+      "";
+    } else if (allNumbersScored) {
+      "You didn't get your bonus!";
+    } else {
+      trackingValue < 0
+        ? "You aren't on track to get your bonus! You need "
+          ++ string_of_int(trackingValue * (-1))
+          ++ " more points."
+        : "You are on track to get your bonus!"
+          ++ (
+            trackingValue > 0
+              ? " You have "
+                ++ string_of_int(trackingValue)
+                ++ " spare points."
+              : ""
+          );
+    };
+  message;
 };
 
 let getInitialScore = () => {

@@ -94,10 +94,10 @@ function getIsTrackingMessage(score) {
   var trackingValue = getNumberTrackingValue(score.numbers);
   if (hasBonus) {
     return "You got your bonus!";
-  } else if (allNumbersScored) {
-    return "You didn't get your bonus!";
   } else if (noNumberScore) {
     return "";
+  } else if (allNumbersScored) {
+    return "You didn't get your bonus!";
   } else if (trackingValue < 0) {
     return "You aren't on track to get your bonus! You need " + (String(Caml_int32.imul(trackingValue, -1)) + " more points.");
   } else {
