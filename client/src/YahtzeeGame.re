@@ -105,27 +105,9 @@ let make = () => {
        )}
       <p> {React.string("Tracking?")} </p>
       {ReasonReact.array(
-         Belt.Array.map(
-           players,
-           ((_, score)) => {
-             let tracking = Score.getNumberTracking(score);
-             let message =
-               tracking < 0
-                 ? "You aren't on track to get your bonus! You need "
-                   ++ string_of_int(tracking * (-1))
-                   ++ " more points."
-                 : "You are on track to get your bonus!"
-                   ++ (
-                     tracking > 0
-                       ? " You have "
-                         ++ string_of_int(tracking)
-                         ++ " spare points."
-                       : ""
-                   );
-
-             <p> {React.string(message)} </p>;
-           },
-         ),
+         Belt.Array.map(players, ((_, score)) => {
+           <p> {React.string(Score.getIsTrackingMessage(score))} </p>
+         }),
        )}
       <p> {React.string("Bonus")} </p>
       {ReasonReact.array(

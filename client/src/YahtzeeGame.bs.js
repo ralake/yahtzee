@@ -5,7 +5,6 @@ var Curry = require("bs-platform/lib/js/curry.js");
 var React = require("react");
 var Belt_Map = require("bs-platform/lib/js/belt_Map.js");
 var Belt_Array = require("bs-platform/lib/js/belt_Array.js");
-var Caml_int32 = require("bs-platform/lib/js/caml_int32.js");
 var Score$Yahtzee = require("./Score.bs.js");
 var Player$Yahtzee = require("./Player.bs.js");
 var Styles$Yahtzee = require("./Styles.bs.js");
@@ -79,11 +78,7 @@ function YahtzeeGame(Props) {
                       })), React.createElement("p", undefined, "Total"), Belt_Array.map(players, (function (param) {
                         return React.createElement("p", undefined, String(param[1].numbersTotal));
                       })), React.createElement("p", undefined, "Tracking?"), Belt_Array.map(players, (function (param) {
-                        var tracking = Score$Yahtzee.getNumberTracking(param[1]);
-                        var message = tracking < 0 ? "You aren't on track to get your bonus! You need " + (String(Caml_int32.imul(tracking, -1)) + " more points.") : "You are on track to get your bonus!" + (
-                            tracking > 0 ? " You have " + (String(tracking) + " spare points.") : ""
-                          );
-                        return React.createElement("p", undefined, message);
+                        return React.createElement("p", undefined, Score$Yahtzee.getIsTrackingMessage(param[1]));
                       })), React.createElement("p", undefined, "Bonus"), Belt_Array.map(players, (function (param) {
                         return React.createElement("p", undefined, String(param[1].numbersBonus));
                       })), React.createElement("p", undefined, "Three of a kind"), Belt_Array.map(players, (function (param) {

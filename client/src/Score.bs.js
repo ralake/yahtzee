@@ -3,6 +3,7 @@
 var Belt_Id = require("bs-platform/lib/js/belt_Id.js");
 var Belt_Map = require("bs-platform/lib/js/belt_Map.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
+var Caml_int32 = require("bs-platform/lib/js/caml_int32.js");
 
 function getNumbersTotal(numbers) {
   return Belt_Map.reduce(numbers, 0, (function (memo, param, v) {
@@ -33,8 +34,8 @@ function getNumbersBonus(numbers) {
   }
 }
 
-function getNumberTracking(score) {
-  var match = Belt_Map.reduce(score.numbers, /* tuple */[
+function getNumberTrackingValue(numbers) {
+  var match = Belt_Map.reduce(numbers, /* tuple */[
         0,
         0
       ], (function (memo, number, value) {
@@ -84,6 +85,26 @@ function getNumberTracking(score) {
                 ];
         }));
   return match[1] - match[0] | 0;
+}
+
+function getIsTrackingMessage(score) {
+  var hasBonus = score.numbersBonus > 0;
+  var noNumberScore = score.numbersTotal === 0;
+  var allNumbersScored = Belt_Map.size(score.numbers) === 6;
+  var trackingValue = getNumberTrackingValue(score.numbers);
+  if (hasBonus) {
+    return "You got your bonus!";
+  } else if (allNumbersScored) {
+    return "You didn't get your bonus!";
+  } else if (noNumberScore) {
+    return "";
+  } else if (trackingValue < 0) {
+    return "You aren't on track to get your bonus! You need " + (String(Caml_int32.imul(trackingValue, -1)) + " more points.");
+  } else {
+    return "You are on track to get your bonus!" + (
+            trackingValue > 0 ? " You have " + (String(trackingValue) + " spare points.") : ""
+          );
+  }
 }
 
 function getInitialScore(param) {
@@ -395,7 +416,8 @@ exports.getNumbersTotal = getNumbersTotal;
 exports.NumbersCompare = NumbersCompare;
 exports.getNextNumbers = getNextNumbers;
 exports.getNumbersBonus = getNumbersBonus;
-exports.getNumberTracking = getNumberTracking;
+exports.getNumberTrackingValue = getNumberTrackingValue;
+exports.getIsTrackingMessage = getIsTrackingMessage;
 exports.getInitialScore = getInitialScore;
 exports.scoreWithTotal = scoreWithTotal;
 exports.getNextPlayerScoreOnNumberChange = getNextPlayerScoreOnNumberChange;

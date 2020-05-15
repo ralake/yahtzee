@@ -58,10 +58,10 @@ let getNumbersBonus = numbers => {
   numbersTotal >= 63 ? 35 : 0;
 };
 
-let getNumberTracking = score => {
+let getNumberTrackingValue = numbers => {
   let (expected, actual) =
     Belt.Map.reduce(
-      score.numbers,
+      numbers,
       (0, 0),
       (memo, number, value) => {
         let (e, a) = memo;
@@ -79,6 +79,29 @@ let getNumberTracking = score => {
     );
 
   actual - expected;
+};
+
+let getIsTrackingMessage = score => {
+  let hasBonus = score.numbersBonus > 0;
+  let noNumberScore = score.numbersTotal === 0;
+  let allNumbersScored = Belt.Map.size(score.numbers) === 6;
+  let trackingValue = getNumberTrackingValue(score.numbers);
+
+  switch (hasBonus, noNumberScore, allNumbersScored, trackingValue) {
+  | (true, _, _, _) => "You got your bonus!"
+  | (_, _, true, _) => "You didn't get your bonus!"
+  | (_, true, _, _) => ""
+  | (_, _, _, num) =>
+    num < 0
+      ? "You aren't on track to get your bonus! You need "
+        ++ string_of_int(num * (-1))
+        ++ " more points."
+      : "You are on track to get your bonus!"
+        ++ (
+          num > 0
+            ? " You have " ++ string_of_int(num) ++ " spare points." : ""
+        )
+  };
 };
 
 let getInitialScore = () => {
