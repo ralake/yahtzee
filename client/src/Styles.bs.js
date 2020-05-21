@@ -3,6 +3,14 @@
 var Css = require("bs-css-emotion/src/Css.js");
 var Curry = require("bs-platform/lib/js/curry.js");
 
+Curry._2(Css.$$global, "body", /* :: */[
+      Css.fontFamily(/* `custom */[
+            1066567601,
+            "Roboto, sans-serif"
+          ]),
+      /* [] */0
+    ]);
+
 function grid(columns) {
   return Curry._1(Css.style, /* :: */[
               Css.display(Css.grid),
@@ -29,4 +37,4 @@ function grid(columns) {
 }
 
 exports.grid = grid;
-/* Css Not a pure module */
+/*  Not a pure module */

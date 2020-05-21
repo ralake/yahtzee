@@ -82,31 +82,17 @@ let getNumberTrackingValue = numbers => {
 };
 
 let getIsTrackingMessage = score => {
-  let hasBonus = score.numbersBonus > 0;
   let noNumberScore = score.numbersTotal === 0;
-  let allNumbersScored = Belt.Map.size(score.numbers) === 6;
   let trackingValue = getNumberTrackingValue(score.numbers);
-
   let message =
-    if (hasBonus) {
-      "You got your bonus!";
-    } else if (noNumberScore) {
+    if (noNumberScore) {
       "";
-    } else if (allNumbersScored) {
-      "You didn't get your bonus!";
+    } else if (trackingValue === 0){
+      "Yes"
+    } else if (trackingValue < 0) {
+      "No (" ++ string_of_int(trackingValue * (-1)) ++ " points under)"
     } else {
-      trackingValue < 0
-        ? "You aren't on track to get your bonus! You need "
-          ++ string_of_int(trackingValue * (-1))
-          ++ " more points."
-        : "You are on track to get your bonus!"
-          ++ (
-            trackingValue > 0
-              ? " You have "
-                ++ string_of_int(trackingValue)
-                ++ " spare points."
-              : ""
-          );
+      "Yes (" ++ string_of_int(trackingValue) ++ " points over)"
     };
   message;
 };

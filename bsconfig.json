@@ -17,7 +17,8 @@
   "bs-dependencies": [
     "reason-react",
     "bs-css",
-    "bs-css-emotion"
+    "bs-css-emotion",
+    "@jsiebern/bs-material-ui"
   ],
   "refmt": 3
 }

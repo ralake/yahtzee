@@ -88,22 +88,16 @@ function getNumberTrackingValue(numbers) {
 }
 
 function getIsTrackingMessage(score) {
-  var hasBonus = score.numbersBonus > 0;
   var noNumberScore = score.numbersTotal === 0;
-  var allNumbersScored = Belt_Map.size(score.numbers) === 6;
   var trackingValue = getNumberTrackingValue(score.numbers);
-  if (hasBonus) {
-    return "You got your bonus!";
-  } else if (noNumberScore) {
+  if (noNumberScore) {
     return "";
-  } else if (allNumbersScored) {
-    return "You didn't get your bonus!";
+  } else if (trackingValue === 0) {
+    return "Yes";
   } else if (trackingValue < 0) {
-    return "You aren't on track to get your bonus! You need " + (String(Caml_int32.imul(trackingValue, -1)) + " more points.");
+    return "No (" + (String(Caml_int32.imul(trackingValue, -1)) + " points under)");
   } else {
-    return "You are on track to get your bonus!" + (
-            trackingValue > 0 ? " You have " + (String(trackingValue) + " spare points.") : ""
-          );
+    return "Yes (" + (String(trackingValue) + " points over)");
   }
 }
 

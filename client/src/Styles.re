@@ -1,5 +1,7 @@
 open Css;
 
+global("body", [fontFamily(`custom("Roboto, sans-serif"))]);
+
 let grid = columns =>
   style([
     display(grid),
