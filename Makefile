@@ -15,6 +15,9 @@ dev-build:
 start:
 	npm start
 
+dev:
+	${BIN}/concurrently "make dev-build" "make dev-start"
+
 dev-start:
 	${BIN}/moduleserve ./ --port 8000
 
