@@ -3,9 +3,15 @@ let make = (~onSubmit) => {
   let (value, setValue) = React.useState(() => "");
 
   <div>
-    <TextInput value onChange={v => setValue(v)} />
-    <button disabled={value === ""} onClick={_ => onSubmit(value)}>
+    <MaterialUi.TextField
+      value=`String(value)
+      onChange={e => setValue(e->ReactEvent.Form.target##value)}
+    />
+    <MaterialUi.Button disabled={value === ""} onClick={_ => {
+      onSubmit(value)
+      setValue(_ => "")
+    }}>
       {React.string("Add player")}
-    </button>
+    </MaterialUi.Button>
   </div>;
 };

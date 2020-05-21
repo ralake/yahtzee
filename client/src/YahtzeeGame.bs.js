@@ -12,12 +12,15 @@ var Score$Yahtzee = require("./Score.bs.js");
 var Player$Yahtzee = require("./Player.bs.js");
 var MaterialUi_Table = require("@jsiebern/bs-material-ui/src/MaterialUi_Table.bs.js");
 var Core = require("@material-ui/core");
+var MaterialUi_AppBar = require("@jsiebern/bs-material-ui/src/MaterialUi_AppBar.bs.js");
+var MaterialUi_Toolbar = require("@jsiebern/bs-material-ui/src/MaterialUi_Toolbar.bs.js");
 var MaterialUi_TableRow = require("@jsiebern/bs-material-ui/src/MaterialUi_TableRow.bs.js");
 var MaterialUi_TableBody = require("@jsiebern/bs-material-ui/src/MaterialUi_TableBody.bs.js");
 var MaterialUi_TableCell = require("@jsiebern/bs-material-ui/src/MaterialUi_TableCell.bs.js");
 var MaterialUi_TableHead = require("@jsiebern/bs-material-ui/src/MaterialUi_TableHead.bs.js");
 var MaterialUi_TextField = require("@jsiebern/bs-material-ui/src/MaterialUi_TextField.bs.js");
 var AddPlayerForm$Yahtzee = require("./AddPlayerForm.bs.js");
+var MaterialUi_Typography = require("@jsiebern/bs-material-ui/src/MaterialUi_Typography.bs.js");
 var MaterialUi_TableContainer = require("@jsiebern/bs-material-ui/src/MaterialUi_TableContainer.bs.js");
 
 function updateScore(state, player, roll, value) {
@@ -71,11 +74,11 @@ function YahtzeeGame(Props) {
                       ""
                     ], undefined, undefined, undefined, undefined, undefined, undefined));
   };
-  return React.createElement("div", undefined, React.createElement("h1", undefined, "Yahtzee!"), React.createElement(AddPlayerForm$Yahtzee.make, {
-                  onSubmit: (function (playerName) {
-                      return Curry._1(dispatch, /* AddPlayer */Block.__(0, [playerName]));
-                    })
-                }), players.length !== 0 ? React.createElement(Core.TableContainer, MaterialUi_TableContainer.makeProps(Caml_option.some(React.createElement(Core.Table, MaterialUi_Table.makeProps(Caml_option.some(null), undefined, undefined, undefined, /* Small */311976103, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.TableHead, MaterialUi_TableHead.makeProps(Caml_option.some(React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.TableCell, MaterialUi_TableCell.makeProps(undefined, "Upper section", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), Belt_Array.map(players, (function (param) {
+  return React.createElement("div", undefined, React.createElement(Core.AppBar, MaterialUi_AppBar.makeProps(undefined, undefined, undefined, undefined, Caml_option.some(React.createElement(Core.Toolbar, MaterialUi_Toolbar.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.Typography, MaterialUi_Typography.makeProps(undefined, "Yahtzee!", undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* H6 */16110, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), React.createElement(AddPlayerForm$Yahtzee.make, {
+                                  onSubmit: (function (playerName) {
+                                      return Curry._1(dispatch, /* AddPlayer */Block.__(0, [playerName]));
+                                    })
+                                }))), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), players.length !== 0 ? React.createElement(Core.TableContainer, MaterialUi_TableContainer.makeProps(Caml_option.some(React.createElement(Core.Table, MaterialUi_Table.makeProps(Caml_option.some(null), undefined, undefined, undefined, /* Small */311976103, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.TableHead, MaterialUi_TableHead.makeProps(Caml_option.some(React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.TableCell, MaterialUi_TableCell.makeProps(undefined, "Upper section", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), Belt_Array.map(players, (function (param) {
                                                       return React.createElement(Core.TableCell, MaterialUi_TableCell.makeProps(undefined, Caml_option.some(param[0].name), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined));
                                                     })))), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), React.createElement(Core.TableBody, MaterialUi_TableBody.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.TableCell, MaterialUi_TableCell.makeProps(undefined, "Ones", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), Belt_Array.map(players, (function (param) {
                                               return React.createElement(Core.TableCell, MaterialUi_TableCell.makeProps(undefined, Caml_option.some(getComponentForRoll(/* Ones */0, param[0], param[1])), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined));

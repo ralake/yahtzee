@@ -61,10 +61,17 @@ let make = () => {
   };
 
   <div>
-    <h1> {React.string("Yahtzee!")} </h1>
-    <AddPlayerForm
-      onSubmit={playerName => dispatch(AddPlayer(playerName))}
-    />
+    <MaterialUi.AppBar>
+      <MaterialUi.Toolbar>
+        <MaterialUi.Typography variant=`H6>
+          {ReasonReact.string("Yahtzee!")}
+        </MaterialUi.Typography>
+        <AddPlayerForm
+          onSubmit={playerName => dispatch(AddPlayer(playerName))}
+        />
+      </MaterialUi.Toolbar>
+    </MaterialUi.AppBar>
+
     {Belt.Array.size(players) > 0
        ? <MaterialUi.TableContainer>
            <MaterialUi.Table size=`Small>
