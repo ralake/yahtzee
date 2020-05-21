@@ -87,12 +87,12 @@ let getIsTrackingMessage = score => {
   let message =
     if (noNumberScore) {
       "";
-    } else if (trackingValue === 0){
-      "Yes"
+    } else if (trackingValue === 0) {
+      "Yes";
     } else if (trackingValue < 0) {
-      "No (" ++ string_of_int(trackingValue * (-1)) ++ " points under)"
+      "No (" ++ string_of_int(trackingValue * (-1)) ++ " points under)";
     } else {
-      "Yes (" ++ string_of_int(trackingValue) ++ " points over)"
+      "Yes (" ++ string_of_int(trackingValue) ++ " points over)";
     };
   message;
 };
