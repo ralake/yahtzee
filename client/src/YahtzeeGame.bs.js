@@ -62,7 +62,7 @@ function reducer(state, action) {
   }
 }
 
-var theme = Styles.createMuiTheme(MaterialUi_ThemeOptions.make(undefined, undefined, undefined, undefined, Caml_option.some(MaterialUi_ThemeOptions.PaletteOptions.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, Caml_option.some(MaterialUi_ThemeOptions.Primary.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "#009688", undefined)), undefined, undefined, undefined, undefined, undefined, undefined, undefined)), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined));
+var theme = Styles.createMuiTheme(MaterialUi_ThemeOptions.make(undefined, undefined, undefined, undefined, Caml_option.some(MaterialUi_ThemeOptions.PaletteOptions.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, Caml_option.some(MaterialUi_ThemeOptions.Primary.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "#009688", undefined)), Caml_option.some(MaterialUi_ThemeOptions.Secondary.make(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "#ffffff", undefined)), undefined, undefined, undefined, undefined, undefined, undefined)), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined));
 
 function YahtzeeGame(Props) {
   var initialState = {
@@ -100,15 +100,15 @@ function YahtzeeGame(Props) {
               theme: theme
             }, React.createElement(Core.AppBar, MaterialUi_AppBar.makeProps(undefined, undefined, undefined, undefined, Caml_option.some(React.createElement(Core.Toolbar, MaterialUi_Toolbar.makeProps(Caml_option.some(React.createElement("div", {
                                           className: Styles$Yahtzee.header
-                                        }, React.createElement(Core.Typography, MaterialUi_Typography.makeProps(undefined, "Yahtzee!", undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* H6 */16110, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), hasPlayers ? React.createElement(Core.ButtonGroup, MaterialUi_ButtonGroup.makeProps(Caml_option.some(null), undefined, /* Inherit */-72987685, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.Button, MaterialUi_Button.makeProps(undefined, undefined, undefined, undefined, (function (param) {
-                                                          return Curry._1(dispatch, /* ClearScores */0);
-                                                        }), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Clear scores", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), React.createElement(Core.Button, MaterialUi_Button.makeProps(undefined, undefined, undefined, undefined, (function (param) {
-                                                          return Curry._1(dispatch, /* ClearPlayers */1);
-                                                        }), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Clear players", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined))) : null, React.createElement(AddPlayerForm$Yahtzee.make, {
+                                        }, React.createElement(Core.Typography, MaterialUi_Typography.makeProps(undefined, "Yahtzee!", undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* H6 */16110, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), React.createElement(AddPlayerForm$Yahtzee.make, {
                                               onSubmit: (function (playerName) {
                                                   return Curry._1(dispatch, /* AddPlayer */Block.__(0, [playerName]));
                                                 })
-                                            }))), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined))), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), hasPlayers ? React.createElement("div", {
+                                            }), React.createElement(Core.ButtonGroup, MaterialUi_ButtonGroup.makeProps(Caml_option.some(null), undefined, /* Inherit */-72987685, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.Button, MaterialUi_Button.makeProps(undefined, undefined, undefined, undefined, (function (param) {
+                                                        return Curry._1(dispatch, /* ClearScores */0);
+                                                      }), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Clear scores", undefined, undefined, undefined, !hasPlayers, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), React.createElement(Core.Button, MaterialUi_Button.makeProps(undefined, undefined, undefined, undefined, (function (param) {
+                                                        return Curry._1(dispatch, /* ClearPlayers */1);
+                                                      }), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Clear players", undefined, undefined, undefined, !hasPlayers, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined))))), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined))), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), hasPlayers ? React.createElement("div", {
                     className: Styles$Yahtzee.scoreCard
                   }, React.createElement(Core.TableContainer, MaterialUi_TableContainer.makeProps(Caml_option.some(React.createElement(Table$Yahtzee.make, {
                                     children: null
@@ -117,37 +117,37 @@ function YahtzeeGame(Props) {
                                                                       children: param[0].name
                                                                     });
                                                         })))), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)), React.createElement(Core.TableBody, MaterialUi_TableBody.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Ones"
+                                                children: Score$Yahtzee.getRollLabel(/* Ones */0)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* Ones */0, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Twos"
+                                                children: Score$Yahtzee.getRollLabel(/* Twos */1)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* Twos */1, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Threes"
+                                                children: Score$Yahtzee.getRollLabel(/* Threes */2)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* Threes */2, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Fours"
+                                                children: Score$Yahtzee.getRollLabel(/* Fours */3)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* Fours */3, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Fives"
+                                                children: Score$Yahtzee.getRollLabel(/* Fives */4)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* Fives */4, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Sixes"
+                                                children: Score$Yahtzee.getRollLabel(/* Sixes */5)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* Sixes */5, param[0], param[1])
@@ -171,49 +171,49 @@ function YahtzeeGame(Props) {
                                                               children: String(param[1].numbersBonus)
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Three of a kind"
+                                                children: Score$Yahtzee.getRollLabel(/* ThreeOfAKind */6)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* ThreeOfAKind */6, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Four of a kind"
+                                                children: Score$Yahtzee.getRollLabel(/* FourOfAKind */7)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* FourOfAKind */7, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Full house"
+                                                children: Score$Yahtzee.getRollLabel(/* FullHouse */8)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* FullHouse */8, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Small straight"
+                                                children: Score$Yahtzee.getRollLabel(/* SmallStraight */9)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* SmallStraight */9, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Large straight"
+                                                children: Score$Yahtzee.getRollLabel(/* LargeStraight */10)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* LargeStraight */10, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Yahtzee"
+                                                children: Score$Yahtzee.getRollLabel(/* Yahtzee */11)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* Yahtzee */11, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Yahtzee bonus"
+                                                children: Score$Yahtzee.getRollLabel(/* YahtzeeBonus */12)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* YahtzeeBonus */12, param[0], param[1])
                                                             });
                                                 }))), React.createElement(Core.TableRow, MaterialUi_TableRow.makeProps(Caml_option.some(null), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined), React.createElement(Cell$Yahtzee.make, {
-                                                children: "Chance"
+                                                children: Score$Yahtzee.getRollLabel(/* Chance */13)
                                               }), Belt_Array.map(players, (function (param) {
                                                   return React.createElement(Cell$Yahtzee.make, {
                                                               children: getComponentForRoll(/* Chance */13, param[0], param[1])

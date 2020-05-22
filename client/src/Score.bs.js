@@ -5,6 +5,40 @@ var Belt_Map = require("bs-platform/lib/js/belt_Map.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Caml_int32 = require("bs-platform/lib/js/caml_int32.js");
 
+function getRollLabel(roll) {
+  switch (roll) {
+    case /* Ones */0 :
+        return "Ones";
+    case /* Twos */1 :
+        return "Tows";
+    case /* Threes */2 :
+        return "Thress";
+    case /* Fours */3 :
+        return "Fours";
+    case /* Fives */4 :
+        return "Fives";
+    case /* Sixes */5 :
+        return "Sixes";
+    case /* ThreeOfAKind */6 :
+        return "Three of a kind";
+    case /* FourOfAKind */7 :
+        return "Four of a kind";
+    case /* FullHouse */8 :
+        return "Full house";
+    case /* SmallStraight */9 :
+        return "Small straight";
+    case /* LargeStraight */10 :
+        return "Large straight";
+    case /* Yahtzee */11 :
+        return "Yahtzee";
+    case /* YahtzeeBonus */12 :
+        return "Yahtzee bonus";
+    case /* Chance */13 :
+        return "Chance";
+    
+  }
+}
+
 function getNumbersTotal(numbers) {
   return Belt_Map.reduce(numbers, 0, (function (memo, param, v) {
                 return memo + v | 0;
@@ -406,6 +440,7 @@ function getRollData(score, roll) {
   }
 }
 
+exports.getRollLabel = getRollLabel;
 exports.getNumbersTotal = getNumbersTotal;
 exports.NumbersCompare = NumbersCompare;
 exports.getNextNumbers = getNextNumbers;

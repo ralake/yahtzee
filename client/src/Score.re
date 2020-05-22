@@ -22,6 +22,25 @@ type numbers =
   | Fives
   | Sixes;
 
+let getRollLabel = (roll: rolls) => {
+  switch (roll) {
+  | Ones => "Ones"
+  | Twos => "Tows"
+  | Threes => "Thress"
+  | Fours => "Fours"
+  | Fives => "Fives"
+  | Sixes => "Sixes"
+  | ThreeOfAKind => "Three of a kind"
+  | FourOfAKind => "Four of a kind"
+  | FullHouse => "Full house"
+  | SmallStraight => "Small straight"
+  | LargeStraight => "Large straight"
+  | Yahtzee => "Yahtzee"
+  | YahtzeeBonus => "Yahtzee bonus"
+  | Chance => "Chance"
+  };
+};
+
 let getNumbersTotal = numbers =>
   Belt.Map.reduce(numbers, 0, (memo, _, v) => {memo + v});
 
