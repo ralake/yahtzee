@@ -30,10 +30,13 @@ let reducer = (state, action) =>
     }
   | UpdateScore(player, roll, value) =>
     updateScore(state, player, roll, value)
-  | ClearScores => { players: Belt.Map.map(state.players, _ => Score.getInitialScore())}
-  | ClearPlayers => { players: Belt.Map.make(~id=(module Player.PlayersCompare)) }
+  | ClearScores => {
+      players: Belt.Map.map(state.players, _ => Score.getInitialScore()),
+    }
+  | ClearPlayers => {
+      players: Belt.Map.make(~id=(module Player.PlayersCompare)),
+    }
   };
-
 
 let theme =
   MaterialUi_Theme.create(
@@ -86,16 +89,16 @@ let make = () => {
           <MaterialUi.Typography variant=`H6>
             {ReasonReact.string("Yahtzee!")}
           </MaterialUi.Typography>
-          {hasPlayers ?
-            <MaterialUi.ButtonGroup color=`Inherit>
-              <MaterialUi.Button onClick={(_) => dispatch(ClearScores)}>
-                {ReasonReact.string("Clear scores")}
-              </MaterialUi.Button>
-              <MaterialUi.Button onClick={(_) => dispatch(ClearPlayers)}>
-                {ReasonReact.string("Clear players")}
-              </MaterialUi.Button>
-            </MaterialUi.ButtonGroup>
-          : ReasonReact.null}
+          {hasPlayers
+             ? <MaterialUi.ButtonGroup color=`Inherit>
+                 <MaterialUi.Button onClick={_ => dispatch(ClearScores)}>
+                   {ReasonReact.string("Clear scores")}
+                 </MaterialUi.Button>
+                 <MaterialUi.Button onClick={_ => dispatch(ClearPlayers)}>
+                   {ReasonReact.string("Clear players")}
+                 </MaterialUi.Button>
+               </MaterialUi.ButtonGroup>
+             : ReasonReact.null}
           <AddPlayerForm
             onSubmit={playerName => dispatch(AddPlayer(playerName))}
           />
@@ -111,18 +114,14 @@ let make = () => {
                    <Cell />
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, _)) =>
-                        <Cell>
-                          {React.string(player.name)}
-                        </Cell>
+                        <Cell> {React.string(player.name)} </Cell>
                       ),
                     )}
                  </MaterialUi.TableRow>
                </MaterialUi.TableHead>
                <MaterialUi.TableBody>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Ones")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Ones")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -132,9 +131,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Twos")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Twos")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -144,9 +141,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Threes")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Threes")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -156,9 +151,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Fours")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Fours")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -168,9 +161,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Fives")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Fives")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -180,9 +171,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Sixes")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Sixes")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -192,9 +181,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Total")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Total")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((_, score)) =>
                         <Cell>
@@ -204,9 +191,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Tracking?")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Tracking?")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((_, score)) =>
                         <Cell>
@@ -216,9 +201,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Bonus")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Bonus")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((_, score)) =>
                         <Cell>
@@ -228,9 +211,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Three of a kind")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Three of a kind")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -240,9 +221,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Four of a kind")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Four of a kind")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -252,9 +231,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Full house")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Full house")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -264,9 +241,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Small straight")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Small straight")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -276,9 +251,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Large straight")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Large straight")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -288,9 +261,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Yahtzee")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Yahtzee")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -300,9 +271,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Yahtzee bonus")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Yahtzee bonus")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -312,9 +281,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Chance")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Chance")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((player, score)) =>
                         <Cell>
@@ -324,9 +291,7 @@ let make = () => {
                     )}
                  </MaterialUi.TableRow>
                  <MaterialUi.TableRow>
-                   <Cell>
-                     {ReasonReact.string("Total")}
-                   </Cell>
+                   <Cell> {ReasonReact.string("Total")} </Cell>
                    {ReasonReact.array(
                       Belt.Array.map(players, ((_, score)) =>
                         <Cell>
@@ -338,7 +303,7 @@ let make = () => {
                </MaterialUi.TableBody>
              </Table>
            </MaterialUi.TableContainer>
-          </div>
+         </div>
        : ReasonReact.null}
   </MaterialUi_ThemeProvider>;
 };
