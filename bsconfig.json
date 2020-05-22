@@ -8,7 +8,7 @@
     "subdirs" : ["src"]
   },
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
-  // "ppx-flags": ["./node_modules/@jsiebern/bs-material-ui-ppx/ppx"],
+  "ppx-flags": ["@jsiebern/bs-material-ui-ppx/ppx6"],
   "package-specs": [{
     "module": "commonjs",
     "in-source": true

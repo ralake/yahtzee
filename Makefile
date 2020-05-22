@@ -5,12 +5,10 @@ BIN = ./node_modules/.bin
 bootstrap:
 	npm install
 
-build:
-	${BIN}/bsb -make-world
+build: clean-reason build-reason
 	NODE_ENV=production $(BIN)/webpack -p --progress --colors
 
-dev-build:
-	${BIN}/bsb -make-world
+dev-build: clean-reason build-reason
 	NODE_ENV=production $(BIN)/webpack -p --progress --colors --watch
 
 start:
@@ -24,3 +22,9 @@ dev-start:
 
 deploy: build
 	gcloud app deploy
+
+clean-reason:
+	${BIN}/bsb -clean-world
+
+build-reason:
+	${BIN}/bsb -make-world

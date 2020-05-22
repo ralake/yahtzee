@@ -26,7 +26,7 @@ function AddPlayerForm(Props) {
                         return Curry._1(setValue, (function (param) {
                                       return "";
                                     }));
-                      }), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Add player", undefined, undefined, undefined, value === "", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* Contained */-515484397, undefined, undefined, undefined, undefined, undefined)));
+                      }), undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, "Add player", undefined, /* Inherit */-72987685, undefined, value === "", undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, /* Outlined */-28821822, undefined, undefined, undefined, undefined, undefined)));
 }
 
 var make = AddPlayerForm;

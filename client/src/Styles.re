@@ -7,7 +7,7 @@ let scoreCard = style([marginTop(px(72))]);
 let header =
   style([
     display(grid),
-    gridTemplateColumns([`fr(1.0), `auto]),
+    gridTemplateColumns([`fr(1.0), `auto, `auto]),
     gridGap(px(8)),
     width(`percent(100.0)),
   ]);

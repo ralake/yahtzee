@@ -8,8 +8,9 @@ let make = (~onSubmit) => {
       onChange={e => setValue(e->ReactEvent.Form.target##value)}
     />
     <MaterialUi.Button
+      color=`Inherit
+      variant=`Outlined
       disabled={value === ""}
-      variant=`Contained
       onClick={_ => {
         onSubmit(value);
         setValue(_ => "");
