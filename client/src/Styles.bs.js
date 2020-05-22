@@ -11,30 +11,58 @@ Curry._2(Css.$$global, "body", /* :: */[
       /* [] */0
     ]);
 
-function grid(columns) {
-  return Curry._1(Css.style, /* :: */[
-              Css.display(Css.grid),
+var scoreCard = Curry._1(Css.style, /* :: */[
+      Css.marginTop(Css.px(72)),
+      /* [] */0
+    ]);
+
+var header = Curry._1(Css.style, /* :: */[
+      Css.display(Css.grid),
+      /* :: */[
+        Css.gridTemplateColumns(/* :: */[
+              /* `fr */[
+                22860,
+                1.0
+              ],
               /* :: */[
-                Css.gridTemplateColumns(/* :: */[
-                      Css.px(200),
-                      /* :: */[
-                        /* `repeat */[
-                          108828507,
-                          /* tuple */[
-                            /* `num */[
-                              5496390,
-                              columns
-                            ],
-                            /* minContent */-550577721
-                          ]
-                        ],
-                        /* [] */0
-                      ]
-                    ]),
+                /* auto */-1065951377,
                 /* [] */0
               ]
-            ]);
-}
+            ]),
+        /* :: */[
+          Css.gridGap(Css.px(8)),
+          /* :: */[
+            Css.width(/* `percent */[
+                  -119887163,
+                  100.0
+                ]),
+            /* [] */0
+          ]
+        ]
+      ]
+    ]);
 
-exports.grid = grid;
+var addPlayerForm = Curry._1(Css.style, /* :: */[
+      Css.marginLeft(/* auto */-1065951377),
+      /* :: */[
+        Css.display(Css.grid),
+        /* :: */[
+          Css.gridTemplateColumns(/* :: */[
+                /* auto */-1065951377,
+                /* :: */[
+                  /* auto */-1065951377,
+                  /* [] */0
+                ]
+              ]),
+          /* :: */[
+            Css.gridGap(Css.px(8)),
+            /* [] */0
+          ]
+        ]
+      ]
+    ]);
+
+exports.scoreCard = scoreCard;
+exports.header = header;
+exports.addPlayerForm = addPlayerForm;
 /*  Not a pure module */

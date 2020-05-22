@@ -10,7 +10,8 @@ build:
 	NODE_ENV=production $(BIN)/webpack -p --progress --colors
 
 dev-build:
-	${BIN}/bsb -make-world -w -ws _
+	${BIN}/bsb -make-world
+	NODE_ENV=production $(BIN)/webpack -p --progress --colors --watch
 
 start:
 	npm start
@@ -19,7 +20,7 @@ dev:
 	${BIN}/concurrently "make dev-build" "make dev-start"
 
 dev-start:
-	${BIN}/moduleserve ./ --port 8000
+	npm start
 
 deploy: build
 	gcloud app deploy

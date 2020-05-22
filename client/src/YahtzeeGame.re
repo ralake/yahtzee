@@ -30,6 +30,9 @@ let reducer = (state, action) =>
     updateScore(state, player, roll, value)
   };
 
+// Override Table styles to remove 100% width
+// Override TableCell styles to add line-height to all - needed?
+
 [@react.component]
 let make = () => {
   let initialState = {
@@ -63,252 +66,253 @@ let make = () => {
   <div>
     <MaterialUi.AppBar>
       <MaterialUi.Toolbar>
-        <MaterialUi.Typography variant=`H6>
-          {ReasonReact.string("Yahtzee!")}
-        </MaterialUi.Typography>
-        <AddPlayerForm
-          onSubmit={playerName => dispatch(AddPlayer(playerName))}
-        />
+        <div className=Styles.header>
+          <MaterialUi.Typography variant=`H6>
+            {ReasonReact.string("Yahtzee!")}
+          </MaterialUi.Typography>
+          <AddPlayerForm
+            onSubmit={playerName => dispatch(AddPlayer(playerName))}
+          />
+        </div>
       </MaterialUi.Toolbar>
     </MaterialUi.AppBar>
-
     {Belt.Array.size(players) > 0
-       ? <MaterialUi.TableContainer>
-           <MaterialUi.Table size=`Small>
-             <MaterialUi.TableHead>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Upper section")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, _)) =>
-                      <MaterialUi.TableCell>
-                        {React.string(player.name)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-             </MaterialUi.TableHead>
-             <MaterialUi.TableBody>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Ones")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(Ones, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Twos")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(Twos, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Threes")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(Threes, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Fours")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(Fours, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Fives")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(Fives, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Sixes")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(Sixes, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Total")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((_, score)) =>
-                      <MaterialUi.TableCell>
-                        {React.string(string_of_int(score.numbersTotal))}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Tracking?")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((_, score)) =>
-                      <MaterialUi.TableCell>
-                        {React.string(Score.getIsTrackingMessage(score))}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Bonus")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((_, score)) =>
-                      <MaterialUi.TableCell>
-                        {React.string(string_of_int(score.numbersBonus))}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Three of a kind")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(ThreeOfAKind, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Four of a kind")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(FourOfAKind, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Full house")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(FullHouse, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Small straight")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(SmallStraight, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Large straight")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(LargeStraight, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Yahtzee")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(Yahtzee, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Yahtzee bonus")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(YahtzeeBonus, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Chance")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((player, score)) =>
-                      <MaterialUi.TableCell>
-                        {getComponentForRoll(Chance, player, score)}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-               <MaterialUi.TableRow>
-                 <MaterialUi.TableCell>
-                   {ReasonReact.string("Total")}
-                 </MaterialUi.TableCell>
-                 {ReasonReact.array(
-                    Belt.Array.map(players, ((_, score)) =>
-                      <MaterialUi.TableCell>
-                        {ReasonReact.string(string_of_int(score.total))}
-                      </MaterialUi.TableCell>
-                    ),
-                  )}
-               </MaterialUi.TableRow>
-             </MaterialUi.TableBody>
-           </MaterialUi.Table>
-         </MaterialUi.TableContainer>
+       ? <div className=Styles.scoreCard>
+           <MaterialUi.TableContainer>
+             <MaterialUi.Table size=`Small>
+               <MaterialUi.TableHead>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell />
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, _)) =>
+                        <MaterialUi.TableCell>
+                          {React.string(player.name)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+               </MaterialUi.TableHead>
+               <MaterialUi.TableBody>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Ones")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(Ones, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Twos")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(Twos, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Threes")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(Threes, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Fours")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(Fours, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Fives")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(Fives, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Sixes")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(Sixes, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Total")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((_, score)) =>
+                        <MaterialUi.TableCell>
+                          {React.string(string_of_int(score.numbersTotal))}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Tracking?")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((_, score)) =>
+                        <MaterialUi.TableCell>
+                          {React.string(Score.getIsTrackingMessage(score))}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Bonus")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((_, score)) =>
+                        <MaterialUi.TableCell>
+                          {React.string(string_of_int(score.numbersBonus))}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Three of a kind")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(ThreeOfAKind, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Four of a kind")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(FourOfAKind, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Full house")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(FullHouse, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Small straight")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(SmallStraight, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Large straight")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(LargeStraight, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Yahtzee")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(Yahtzee, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Yahtzee bonus")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(YahtzeeBonus, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Chance")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((player, score)) =>
+                        <MaterialUi.TableCell>
+                          {getComponentForRoll(Chance, player, score)}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+                 <MaterialUi.TableRow>
+                   <MaterialUi.TableCell>
+                     {ReasonReact.string("Total")}
+                   </MaterialUi.TableCell>
+                   {ReasonReact.array(
+                      Belt.Array.map(players, ((_, score)) =>
+                        <MaterialUi.TableCell>
+                          {ReasonReact.string(string_of_int(score.total))}
+                        </MaterialUi.TableCell>
+                      ),
+                    )}
+                 </MaterialUi.TableRow>
+               </MaterialUi.TableBody>
+             </MaterialUi.Table>
+           </MaterialUi.TableContainer>
+         </div>
        : ReasonReact.null}
   </div>;
 };
