@@ -4,6 +4,7 @@ var Belt_Id = require("bs-platform/lib/js/belt_Id.js");
 var Belt_Map = require("bs-platform/lib/js/belt_Map.js");
 var Caml_obj = require("bs-platform/lib/js/caml_obj.js");
 var Caml_int32 = require("bs-platform/lib/js/caml_int32.js");
+var Caml_builtin_exceptions = require("bs-platform/lib/js/caml_builtin_exceptions.js");
 
 function getRollLabel(roll) {
   switch (roll) {
@@ -50,6 +51,82 @@ var cmp = Caml_obj.caml_compare;
 var NumbersCompare = Belt_Id.MakeComparable({
       cmp: cmp
     });
+
+function rollToString(roll) {
+  switch (roll) {
+    case /* Ones */0 :
+        return "Ones";
+    case /* Twos */1 :
+        return "Twos";
+    case /* Threes */2 :
+        return "Threes";
+    case /* Fours */3 :
+        return "Fours";
+    case /* Fives */4 :
+        return "Fives";
+    case /* Sixes */5 :
+        return "Sixes";
+    case /* ThreeOfAKind */6 :
+        return "ThreeOfAKind";
+    case /* FourOfAKind */7 :
+        return "FourOfAKind";
+    case /* FullHouse */8 :
+        return "FullHouse";
+    case /* SmallStraight */9 :
+        return "SmallStraight";
+    case /* LargeStraight */10 :
+        return "LargeStraight";
+    case /* Yahtzee */11 :
+        return "Yahtzee";
+    case /* YahtzeeBonus */12 :
+        return "YahtzeeBonus";
+    case /* Chance */13 :
+        return "Chance";
+    
+  }
+}
+
+function rollFromString(roll) {
+  switch (roll) {
+    case "Chance" :
+        return /* Chance */13;
+    case "Fives" :
+        return /* Fives */4;
+    case "FourOfAKind" :
+        return /* FourOfAKind */7;
+    case "Fours" :
+        return /* Fours */3;
+    case "FullHouse" :
+        return /* FullHouse */8;
+    case "LargeStraight" :
+        return /* LargeStraight */10;
+    case "Ones" :
+        return /* Ones */0;
+    case "Sixes" :
+        return /* Sixes */5;
+    case "SmallStraight" :
+        return /* SmallStraight */9;
+    case "ThreeOfAKind" :
+        return /* ThreeOfAKind */6;
+    case "Threes" :
+        return /* Threes */2;
+    case "Twos" :
+        return /* Twos */1;
+    case "Yahtzee" :
+        return /* Yahtzee */11;
+    case "YahtzeeBonus" :
+        return /* YahtzeeBonus */12;
+    default:
+      throw [
+            Caml_builtin_exceptions.match_failure,
+            /* tuple */[
+              "Score.re",
+              87,
+              38
+            ]
+          ];
+  }
+}
 
 function getNextNumbers(value, number, score) {
   if (value !== undefined) {
@@ -443,6 +520,8 @@ function getRollData(score, roll) {
 exports.getRollLabel = getRollLabel;
 exports.getNumbersTotal = getNumbersTotal;
 exports.NumbersCompare = NumbersCompare;
+exports.rollToString = rollToString;
+exports.rollFromString = rollFromString;
 exports.getNextNumbers = getNextNumbers;
 exports.getNumbersBonus = getNumbersBonus;
 exports.getNumberTrackingValue = getNumberTrackingValue;

@@ -65,6 +65,44 @@ type t = {
   total: int,
 };
 
+let rollToString = (roll: rolls) => {
+  switch (roll) {
+  | Ones => "Ones"
+  | Twos => "Twos"
+  | Threes => "Threes"
+  | Fours => "Fours"
+  | Fives => "Fives"
+  | Sixes => "Sixes"
+  | ThreeOfAKind => "ThreeOfAKind"
+  | FourOfAKind => "FourOfAKind"
+  | FullHouse => "FullHouse"
+  | SmallStraight => "SmallStraight"
+  | LargeStraight => "LargeStraight"
+  | Yahtzee => "Yahtzee"
+  | YahtzeeBonus => "YahtzeeBonus"
+  | Chance => "Chance"
+  };
+};
+
+let rollFromString = (roll): rolls => {
+  switch (roll) {
+  | "Ones" => Ones
+  | "Twos" => Twos
+  | "Threes" => Threes
+  | "Fours" => Fours
+  | "Fives" => Fives
+  | "Sixes" => Sixes
+  | "ThreeOfAKind" => ThreeOfAKind
+  | "FourOfAKind" => FourOfAKind
+  | "FullHouse" => FullHouse
+  | "SmallStraight" => SmallStraight
+  | "LargeStraight" => LargeStraight
+  | "Yahtzee" => Yahtzee
+  | "YahtzeeBonus" => YahtzeeBonus
+  | "Chance" => Chance
+  };
+};
+
 let getNextNumbers = (value, number, score: t) => {
   switch (value) {
   | Some(num) => Belt.Map.set(score.numbers, number, num)

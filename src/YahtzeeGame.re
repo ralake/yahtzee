@@ -1,10 +1,35 @@
 type state = {players: Player.players};
 
 type action =
-  | AddPlayer(string)
+  | AddNewPlayer(Player.player)
   | UpdateScore(Player.player, Score.rolls, option(int))
   | ClearScores
   | ClearPlayers;
+
+type scoreUpdate = {
+  player: Player.player,
+  roll: Score.rolls,
+  score: option(int),
+};
+
+let encodeScoreUpdate = update =>
+  Json.Encode.(
+    object_([
+      ("player", string(Encode.Players.encode(update.player))),
+      ("roll", string(Score.rollToString(update.roll))),
+      (
+        "score",
+        switch (update.score) {
+        | Some(num) => int(num)
+        | None => null
+        },
+      ),
+    ])
+  );
+
+let encodeUpdate = (player, roll, score) => {
+  Json.stringify(encodeScoreUpdate({player, roll, score}));
+};
 
 let updateScore = (state, player, roll: Score.rolls, value) => {
   let score = Belt.Map.get(state.players, player);
@@ -18,16 +43,11 @@ let updateScore = (state, player, roll: Score.rolls, value) => {
   };
 };
 
+module Client = BsSocket.Client.Make(Messages);
+let socket = Client.create();
+
 let reducer = (state, action) =>
   switch (action) {
-  | AddPlayer(name) => {
-      players:
-        Belt.Map.set(
-          state.players,
-          Player.getInitialPlayer(name),
-          Score.getInitialScore(),
-        ),
-    }
   | UpdateScore(player, roll, value) =>
     updateScore(state, player, roll, value)
   | ClearScores => {
@@ -35,6 +55,9 @@ let reducer = (state, action) =>
     }
   | ClearPlayers => {
       players: Belt.Map.make(~id=(module Player.PlayersCompare)),
+    }
+  | AddNewPlayer(player) => {
+      players: Belt.Map.set(state.players, player, Score.getInitialScore()),
     }
   };
 
@@ -62,7 +85,7 @@ let make = () => {
   let players = Belt.Map.toArray(state.players);
   let hasPlayers = Belt.Array.size(players) > 0;
 
-  let getComponentForRoll = (roll, player, score) => {
+  let getComponentForRoll = (roll, player: Player.player, score) => {
     let (value, max, step) = Score.getRollData(score, roll);
     <MaterialUi.TextField
       value={
@@ -78,10 +101,40 @@ let make = () => {
         let val_ =
           value === "" || int_of_string(value) mod int_of_float(step) != 0
             ? None : Some(int_of_string(value));
-        dispatch(UpdateScore(player, roll, val_));
+        Client.emit(
+          socket,
+          UpdateRollScore(
+            Encode.ScoreUpdates.encode({
+              playerName: player.name,
+              roll: Score.rollToString(roll),
+              score: val_,
+            }),
+          ),
+        );
       }}
     />;
   };
+
+  React.useEffect0(() => {
+    Client.on(socket, m =>
+      switch (m) {
+      | ReceiveNewPlayer(player) =>
+        dispatch(AddNewPlayer(Decode.Players.decode(player)))
+      | ReceiveClearScores(_) => dispatch(ClearScores)
+      | ReceiveClearPlayers(_) => dispatch(ClearPlayers)
+      | ReceiveUpdatedRollScore(update) =>
+        let decodedUpdate = Decode.ScoreUpdates.decode(update);
+        dispatch(
+          UpdateScore(
+            Player.getInitialPlayer(decodedUpdate.playerName),
+            Score.rollFromString(decodedUpdate.roll),
+            decodedUpdate.score,
+          ),
+        );
+      }
+    );
+    Some(() => ());
+  });
 
   <MaterialUi_ThemeProvider theme>
     <MaterialUi.AppBar>
@@ -91,15 +144,24 @@ let make = () => {
             {ReasonReact.string("Yahtzee!")}
           </MaterialUi.Typography>
           <AddPlayerForm
-            onSubmit={playerName => dispatch(AddPlayer(playerName))}
+            onSubmit={playerName =>
+              Client.emit(
+                socket,
+                AddNewPlayer(
+                  Encode.Players.encode(Player.getInitialPlayer(playerName)),
+                ),
+              )
+            }
           />
           <MaterialUi.ButtonGroup color=`Inherit>
             <MaterialUi.Button
-              disabled={!hasPlayers} onClick={_ => dispatch(ClearScores)}>
+              disabled={!hasPlayers}
+              onClick={_ => Client.emit(socket, ClearScores(true))}>
               {ReasonReact.string("Clear scores")}
             </MaterialUi.Button>
             <MaterialUi.Button
-              disabled={!hasPlayers} onClick={_ => dispatch(ClearPlayers)}>
+              disabled={!hasPlayers}
+              onClick={_ => Client.emit(socket, ClearPlayers(true))}>
               {ReasonReact.string("Clear players")}
             </MaterialUi.Button>
           </MaterialUi.ButtonGroup>

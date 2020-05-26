@@ -4,8 +4,7 @@
     "react-jsx": 3
   },
   "sources": {
-    "dir" : "client",
-    "subdirs" : ["src"]
+    "dir" : "src"
   },
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
   "ppx-flags": ["@jsiebern/bs-material-ui-ppx/ppx6"],
@@ -19,7 +18,10 @@
     "reason-react",
     "bs-css",
     "bs-css-emotion",
-    "@jsiebern/bs-material-ui"
+    "@jsiebern/bs-material-ui",
+    "bs-socket",
+    "bs-express",
+    "@glennsl/bs-json"
   ],
   "refmt": 3
 }
