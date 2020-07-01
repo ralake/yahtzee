@@ -25,8 +25,8 @@ type numbers =
 let getRollLabel = (roll: rolls) => {
   switch (roll) {
   | Ones => "Ones"
-  | Twos => "Tows"
-  | Threes => "Thress"
+  | Twos => "Twos"
+  | Threes => "Threes"
   | Fours => "Fours"
   | Fives => "Fives"
   | Sixes => "Sixes"

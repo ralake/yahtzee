@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start": "node src/Server.bs.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-client": "bsb -clean-world && bsb -make-world && NODE_ENV=production webpack -p --progress --colors"
+    "build": "bsb -clean-world && bsb -make-world && NODE_ENV=production webpack -p --progress --colors"
   },
   "keywords": [
     "BuckleScript",

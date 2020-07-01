@@ -7,7 +7,7 @@
     "dir" : "src"
   },
   "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
-  "ppx-flags": ["@jsiebern/bs-material-ui-ppx/ppx6"],
+  "ppx-flags": ["@jsiebern/bs-material-ui-ppx/ppx6.exe"],
   "package-specs": [{
     "module": "commonjs",
     "in-source": true

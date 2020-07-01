@@ -1,24 +1,15 @@
 BIN = ./node_modules/.bin
 
-.PHONY: bootstrap build build-server dev-build start deploy logs
+.PHONY: bootstrap dev deploy clean-reason build-reason
 
 bootstrap:
 	npm install
 
-build-client:
-	npm run build-client
-
-dev-build-client: clean-reason build-reason
+build-watch: clean-reason build-reason
 	NODE_ENV=production $(BIN)/webpack -p --progress --colors --watch
 
-start:
-	npm start
-
 dev:
-	${BIN}/concurrently "make dev-build-client" "make start"
-
-deploy: clean-reason build-reason build-client
-	gcloud app deploy
+	${BIN}/concurrently "make build-watch" "make start"
 
 clean-reason:
 	${BIN}/bsb -clean-world
@@ -26,5 +17,16 @@ clean-reason:
 build-reason:
 	${BIN}/bsb -make-world
 
-logs:
-	gcloud app logs tail -s default
+deploy: clean-reason docker-build docker-push
+	kubectl set image deployment yahtzee-web yahtzee-app=gcr.io/yahtzee-277312/yahtzee-app:v1
+
+docker-build:
+	docker build -t gcr.io/yahtzee-277312/yahtzee-app:v1 .
+
+docker-push:
+	docker push gcr.io/yahtzee-277312/yahtzee-app:v1
+
+docker-run-local:
+	docker run --rm -p 2001:2001 gcr.io/yahtzee-277312/yahtzee-app:v1
+
+# https://cloud.google.com/kubernetes-engine/docs/tutorials/hello-app

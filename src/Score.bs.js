@@ -11,9 +11,9 @@ function getRollLabel(roll) {
     case /* Ones */0 :
         return "Ones";
     case /* Twos */1 :
-        return "Tows";
+        return "Twos";
     case /* Threes */2 :
-        return "Thress";
+        return "Threes";
     case /* Fours */3 :
         return "Fours";
     case /* Fives */4 :
