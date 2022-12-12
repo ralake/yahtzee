@@ -23,7 +23,7 @@
     "bs-platform": "^7.3.2",
     "bs-socket": "^1.2.2",
     "concurrently": "^5.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "reason-react": ">=0.7.1",
